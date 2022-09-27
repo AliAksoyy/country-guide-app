@@ -2,8 +2,12 @@ const input = document.querySelector("#input")
 const btn = document.querySelector("#btn")
 const content = document.querySelector(".content")
 const container = document.querySelector(".container")
+let isOkey =false
+btn.addEventListener("click",()=> {
 
-
+    fetchByCountry(input.value);
+    input.value= ""
+})
 
 
 
@@ -14,7 +18,8 @@ const  fetchByCountry = (name)=> {
   fetch(url)
     .then((res) => {
       if (!res.ok) {
-        throw new Error(`Something went wrong ${res.status}`);
+        isOkey = true
+        // throw new Error(`Something went wrong ${res.status}`);
       }
       return res.json();
     })
@@ -28,46 +33,61 @@ const  fetchByCountry = (name)=> {
   const renderData = (countries)=> {
     console.log(countries)
 
-    const {
-      flags: { svg },
-      name: { common },
-      capital,
-      continents,
-      population,
-      currencies,
-      languages: { tur },
-    } = countries[0];
-
-      console.log(svg,common,capital,continents,population,Object.values(currencies)[0].name,tur)
+    if(isOkey) {
       content.innerHTML = `
-      <div class="card" style="width: 18rem;">
-      <img src="..." class="card-img-top" alt="...">
+      <p>Something went wrong </p>
+      <img src="./img/404.png">
+      
+      `
+    }else {
+      const {
+        flags: { svg },
+        name: { common },
+        capital,
+        continents,
+        population,
+        currencies,
+        languages: { tur },
+        maps: { googleMaps },
+      } = countries[0];
+      console.log(
+        svg,
+        common,
+        capital,
+        continents,
+        population,
+        Object.values(currencies)[0].name,
+        tur
+      );
+      content.innerHTML = `
+      <div class="card" style="width: 14rem;">
+      <img src="${svg}" class="card-img-top" alt="...">
        <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <h5 class="card-title text-center text-uppercase">${common}</h5>
        </div>
        <ul class="list-group list-group-flush">
-       <li class="list-group-item">An item</li>
-        <li class="list-group-item">A second item</li>
-        <li class="list-group-item">A third item</li>
+       <li class="list-group-item"><span class="fw-bold">Capital:</span> ${capital}</li>
+       <li class="list-group-item"><span class="fw-bold">Continent:</span> ${continents}</li>
+       <li class="list-group-item"><span class="fw-bold">Population:</span> ${population}</li>
+       <li class="list-group-item"><span class="fw-bold">Currency:</span> ${
+         Object.values(currencies)[0].name
+       } ${Object.values(currencies)[0].symbol}</li>
+       <li class="list-group-item"><span class="fw-bold">Languages:</span> ${tur}</li>
        </ul>
        <div class="card-body">
-         <a href="#" class="card-link">Card link</a>
-        <a href="#" class="card-link">Another link</a>
+         <a href="${googleMaps}" class="card-link btn btn-danger mx-auto w-100">Google Maps</a>
+        
         </div>
-        </div>
-      
-      
-      
-      
+        </div> 
       `;
-    
+    }
   }
  
 
 
 
   fetchByCountry("turkey");
+  fetchByCountry("south africa");
 
 
 
