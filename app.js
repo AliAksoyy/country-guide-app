@@ -5,6 +5,7 @@ const container = document.querySelector(".container")
 let isOkey =false
 btn.addEventListener("click",()=> {
 
+
     fetchByCountry(input.value);
     input.value= ""
 })
@@ -70,25 +71,42 @@ const  fetchByCountry = (name)=> {
         tur
       );
       content.innerHTML = `
-      <div class="card" style="width: 14rem;">
-      <img src="${svg}" class="card-img-top" alt="...">
-       <div class="card-body">
-        <h5 class="card-title text-center text-uppercase">${common}</h5>
-       </div>
-       <ul class="list-group list-group-flush">
-       <li class="list-group-item"><span class="fw-bold">Capital:</span> ${capital}</li>
-       <li class="list-group-item"><span class="fw-bold">Continent:</span> ${continents}</li>
-       <li class="list-group-item"><span class="fw-bold">Population:</span> ${population}</li>
-       <li class="list-group-item"><span class="fw-bold">Currency:</span> ${
-         Object.values(currencies)[0].name
-       } ${Object.values(currencies)[0].symbol}</li>
-       <li class="list-group-item"><span class="fw-bold">Languages:</span> ${tur}</li>
-       </ul>
-       <div class="card-body">
-         <a href="${googleMaps}" class="card-link btn btn-danger mx-auto w-100">Google Maps</a>
-        
+      
+      <img src="${svg}" class="flag-img">
+      <h2>${common}</h2>
+       <div class=" wrapper">
+        <div class="data-wrapper>
+        <h4>Capital:</h4>
+        <span>${capital}</span>
         </div>
-        </div> 
+       </div>
+       <div class=" wrapper">
+        <div class="data-wrapper>
+        <h4>Continent:</h4>
+        <span>${continents}</span>
+        </div>
+       </div>
+       <div class=" wrapper">
+        <div class="data-wrapper>
+        <h4>Population:</h4>
+        <span>${population}</span>
+        </div>
+       </div>
+       <div class=" wrapper">
+        <div class="data-wrapper>
+        <h4>Currency:</h4>
+        <span>${Object.values(currencies)[0].name} ${
+        Object.values(currencies)[0].symbol
+      }</span>
+        </div>
+       </div>
+       <div class=" wrapper">
+        <div class="data-wrapper>
+        <h4>Languages:</h4>
+        <span>${tur}</span>
+        </div>
+       </div>
+
       `;
     
   }
