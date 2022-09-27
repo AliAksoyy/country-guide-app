@@ -10,7 +10,12 @@ btn.addEventListener("click",()=> {
     input.value= ""
 })
 
-
+  input.addEventListener("keypress", (e) => {
+    if (e.which == 13) {
+      fetchByCountry(input.value);
+      input.value = "";
+    }
+  });
 
 const  fetchByCountry = (name)=> {
 
@@ -90,7 +95,7 @@ const  fetchByCountry = (name)=> {
     
   }
  
-    
+  
 
 
 
