@@ -17,9 +17,11 @@ const  fetchByCountry = (name)=> {
 
   fetch(url)
     .then((res) => {
+        console.log(res.ok);
+
       if (!res.ok) {
-        isOkey = true
-        // throw new Error(`Something went wrong ${res.status}`);
+        renderError(`${res.status}`)
+        throw new Error()
       }
       return res.json();
     })
@@ -30,16 +32,20 @@ const  fetchByCountry = (name)=> {
 }
 
 
+  const renderError = ()=> {
+
+  
+      content.innerHTML = `
+      <p class="error">Please enter a avlid country name</p>
+      `;
+  
+    }
+  
+
   const renderData = (countries)=> {
     console.log(countries)
 
-    if(isOkey) {
-      content.innerHTML = `
-      <p>Something went wrong </p>
-      <img src="./img/404.png">
-      
-      `
-    }else {
+  
       const {
         flags: { svg },
         name: { common },
@@ -80,14 +86,16 @@ const  fetchByCountry = (name)=> {
         </div>
         </div> 
       `;
-    }
+    
   }
  
 
 
 
   fetchByCountry("turkey");
-  fetchByCountry("south africa");
+  // fetchByCountry("south africa");
+
+  
 
 
 
