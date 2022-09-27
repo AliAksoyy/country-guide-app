@@ -38,6 +38,10 @@ const  fetchByCountry = (name)=> {
       content.innerHTML = `
       <p class="error">Please enter a avlid country name</p>
       `;
+      setTimeout(() => {
+        document.querySelector(".error").innerHTML = ""
+        
+      }, 2000);
   
     }
   
