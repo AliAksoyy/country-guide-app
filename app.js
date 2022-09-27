@@ -2,7 +2,7 @@ const input = document.querySelector("#input")
 const btn = document.querySelector("#btn")
 const content = document.querySelector(".content")
 const container = document.querySelector(".container")
-let isOkey =false
+
 btn.addEventListener("click",()=> {
 
 
@@ -50,60 +50,39 @@ const  fetchByCountry = (name)=> {
   const renderData = (countries)=> {
     console.log(countries)
 
-  
-      const {
-        flags: { svg },
-        name: { common },
-        capital,
-        continents,
-        population,
-        currencies,
-        languages: { tur },
-        maps: { googleMaps },
-      } = countries[0];
-      console.log(
-        svg,
-        common,
-        capital,
-        continents,
-        population,
-        Object.values(currencies)[0].name,
-        tur
-      );
       content.innerHTML = `
       
-      <img src="${svg}" class="flag-img">
-      <h2>${common}</h2>
-       <div class=" wrapper">
-        <div class="data-wrapper>
-        <h4>Capital:</h4>
-        <span>${capital}</span>
-        </div>
+      <img src="${countries[0].flags.svg}" class="flag-img">
+      <h2>${countries[0].name.common}</h2>
+       <div class="wrapper">
+          <div class="data-wrapper">
+            <h4>Capital:</h4>
+            <span>${countries[0].capital[0]}</span>
+          </div>
        </div>
        <div class=" wrapper">
-        <div class="data-wrapper>
+        <div class="data-wrapper">
         <h4>Continent:</h4>
-        <span>${continents}</span>
+        <span>${countries[0].continents[0]}</span>
         </div>
        </div>
        <div class=" wrapper">
-        <div class="data-wrapper>
+        <div class="data-wrapper">
         <h4>Population:</h4>
-        <span>${population}</span>
+        <span>${countries[0].population}</span>
         </div>
        </div>
        <div class=" wrapper">
-        <div class="data-wrapper>
+        <div class="data-wrapper">
         <h4>Currency:</h4>
-        <span>${Object.values(currencies)[0].name} ${
-        Object.values(currencies)[0].symbol
-      }</span>
+         <span>${
+          countries[0].currencies[Object.keys(countries[0].currencies)].name} ${Object.keys(countries[0].currencies)[0]}</span>
         </div>
        </div>
        <div class=" wrapper">
-        <div class="data-wrapper>
+        <div class="data-wrapper">
         <h4>Languages:</h4>
-        <span>${tur}</span>
+         <span>${Object.values(countries[0].languages).toString().split(",").join(", ")}</span>
         </div>
        </div>
 
